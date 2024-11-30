@@ -1,37 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Name: MAHI Mohiuddin Hossain
-        ID: 12421103</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Three.js</title>
+	<link rel="stylesheet" href="./main.css">
+	<script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "https://unpkg.com/three@0.156.0/build/three.module.js",
+				"three/addons/": "https://unpkg.com/three@0.156.0/examples/jsm/"
+			}
+		}
+	</script>
 </head>
 <body>
-    <style>
-    body{ background-image: url('image/image1.png');
-    background-size: cover;
-    text-align: center;}
+	<canvas id="three-canvas"></canvas>
+    <div id="side-menu">
+        <button id="close-btn">&times;</button>
+        <h2>メニュー</h2>
+        <ul>
+            <li><a href="http://www.yamashita-kogei.com/index.html">ホーム</a></li>
+            <li><a href="http://www.yamashita-kogei.com/company.html">私たちについて</a></li>
+            <li><a href="http://www.yamashita-kogei.com/brand.html">サービス</a></li>
+            <li><a href="http://www.yamashita-kogei.com/contact.html">お問い合わせ</a></li>
+            
+        </ul>
+    </div>
+    
+    <button id="menu-btn">☰ メニューを開く</button>
+    
+    
+	<style>
+        /* Style for the button */
+        #music-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px 15px;
+            background-color: #ff5733;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #music-btn:hover {
+            background-color: #24292c;
+        }
     </style>
-   <article>
-    <h1>Important links related to APU is listed below</h1>
-    <p><a href="https://www.apu.ac.jp/home/">APU Home Page</a></p>
-    <p>The APU official home page provides access to all general information about the university, for students and visitors.</p>
+</head>
+<body>
+    <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
+    <h1>Welcome to My Website</h1>
+    <p>This is my awesome website!</p>
 
-    <p><a href="https://admissions.apu.ac.jp/apply_online/">Admission Page</a></p>
-    <p>-+ APU admissions page, where prospective students can find information on the application process, to apply online.</p>
+    <!-- Hidden audio player -->
+    <audio id="background-music" loop>
+        <source src="Music/ad.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
-    <p><a href="https://cmate2.apu.ac.jp/campusapu/top.do">CampusMate</a></p>
-    <p>CampusMate is APU's student information management system. Students can check academic progress.</p>
+    <!-- Music button -->
+    <button id="music-btn">Play Music</button>
 
-    <p><a href="https://portal2.apu.ac.jp/campusp/top.do">Campus Terminal</a></p>
-    <p>The Campus Terminal is a portal for students and staff to access academic and administrative information, announcements, and various APU services.</p>
+    <script>
+        const music = document.getElementById('background-music');
+        const musicBtn = document.getElementById('music-btn');
+        let isPlaying = false;
 
-    <p><a href="https://www.apu.ac.jp/academic/">Academic Office</a></p>
-    <p>The Academic Office page for regulations, class schedules, curriculum details, and contact information for academic advisors.</p>
-    <br>Contact me through Email  <a href="mailto:ma21m6it@apu.ac.jp" >ma21m6it@apu.ac.jp</a></p>
-   </article>
-    <footer>  
-    <p>All rights reserved APU2024</p>
-    </footer>
+        // Toggle play/pause music
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+                musicBtn.textContent = "Play Music";
+            } else {
+                music.play();
+                musicBtn.textContent = "Pause Music";
+            }
+            isPlaying = !isPlaying;
+        });
+    </script>
+    
+  <script type="module" src="main.js"></script>
+  <script src="loadingScreen.js"></script>
+
 </body>
 </html>
