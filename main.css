@@ -1,0 +1,177 @@
+body {
+	margin: 0;
+}
+#three-canvas {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+/* styles.css */
+
+/* Loading Screen Styles */
+#loading-screen {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: #ffffff;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999; /* Ensure it overlays all content */
+  }
+  
+  /* Spinner Styles */
+  .spinner {
+	width: 50px;
+	height: 50px;
+	border: 5px solid #cccccc;
+	border-top: 5px solid #3498db;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+  }
+  
+  /* Keyframes for Spinner Animation */
+  @keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+  }
+  
+  /* Hide the main content initially */
+  #main-content {
+	display: none;
+  }
+  /* Side menu styling */
+#side-menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+#side-menu h2 {
+    color: white;
+    margin-left: 25px;
+}
+
+#side-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#side-menu ul li {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+}
+
+#side-menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+}
+
+#side-menu ul li a:hover {
+    background-color: #724c4c;
+}
+
+#close-btn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 36px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+#menu-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 18px;
+    background-color: #262525;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#menu-btn:hover {
+    background-color: #24292c;
+}
+/* Main container for the instructions */
+#instructions {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    overflow: hidden;
+  }
+  
+  /* Style for the heading or title */
+  #instructions p {
+    margin: 0 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  /* Style for the main list */
+  #instructions ul {
+    padding-left: 20px;
+    margin: 0;
+    list-style: disc;
+  }
+  
+  /* Style for nested lists */
+  #instructions ul ul {
+    padding-left: 20px;
+    margin-top: 5px;
+    list-style: circle;
+  }
+  
+  /* Style for each list item */
+  #instructions li {
+    margin-bottom: 10px;
+  }
+  
+  /* Close button */
+  #instructions button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  /* Close button hover effect */
+  #instructions button:hover {
+    color: #ff4c4c;
+  }
+  
