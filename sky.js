@@ -6,7 +6,7 @@ export async function createSky(scene) {
 
   // Create the Sky object
   const sky = new Sky();
-  sky.scale.setScalar(1000); // Large scale to cover the entire scene
+  sky.scale.setScalar(500); // Large scale to cover the entire scene
   scene.add(sky);
 
   // Sky shader parameters
