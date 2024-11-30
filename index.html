@@ -20,7 +20,7 @@
 	<canvas id="three-canvas"></canvas>
     <div id="side-menu">
         <button id="close-btn">&times;</button>
-        <h2>Art Bridges Project</h2>
+        <h2>APU Bridge Program</h2>
       
     </div>
     
@@ -53,8 +53,24 @@
     <div class="spinner"></div>
     <p>Loading...</p>
   </div>
-    <h1>Welcome to My Website</h1>
-    <p>This is my awesome website!</p>
+  <div id="instructions">
+    <p><strong>Instructions:</strong></p>
+    <ul>
+      <li><b>Right-click:</b> Enter the scene</li>
+      <li><b>ESC:</b> Unlock the mouse</li>
+      <li><b>WASD:</b> Move around:
+        <ul>
+          <li><b>W:</b> Move forward</li>
+          <li><b>A:</b> Move left</li>
+          <li><b>S:</b> Move backward</li>
+          <li><b>D:</b> Move right</li>
+        </ul>
+      </li>
+      <li><b>Mouse:</b> Look around</li>
+      <li><b>Device:</b> PC(Currently not Supported On mobile)</li>
+    </ul>
+  </div>
+  
 
     <!-- Hidden audio player -->
     <audio id="background-music" loop>
@@ -82,24 +98,7 @@
             isPlaying = !isPlaying;
         });
     </script>
- <div id="instructions">
-  <p><strong>Instructions:</strong></p>
-  <ul>
-    <li><b>Right-click:</b> Enter the scene</li>
-    <li><b>ESC:</b> Unlock the mouse</li>
-    <li><b>WASD:</b> Move around:
-      <ul>
-        <li><b>W:</b> Move forward</li>
-        <li><b>A:</b> Move left</li>
-        <li><b>S:</b> Move backward</li>
-        <li><b>D:</b> Move right</li>
-      </ul>
-    </li>
-    <li><b>Mouse:</b> Look around</li>
-  </ul>
-</div>
-
-
+    
   <script type="module" src="main.js"></script>
   <script src="loadingScreen.js"></script>
 
