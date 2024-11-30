@@ -47,22 +47,6 @@ controls.addEventListener('unlock', () => console.log('Pointer unlocked'));
 const sideMenu = document.getElementById('side-menu');
 const menuBtn = document.getElementById('menu-btn');
 const closeBtn = document.getElementById('close-btn');
-// Select the close button
-const closeButton = document.getElementById('close-instructions');
-
-// Add a click event listener to hide the instructions
-closeButton.addEventListener('click', function () {
-  document.getElementById('instructions').style.display = 'none';
-});
-
-// Optional: Add a timeout to hide the instructions after a certain time
-setTimeout(() => {
-  const instructions = document.getElementById('instructions');
-  if (instructions) {
-    instructions.style.opacity = '0';
-    setTimeout(() => instructions.style.display = 'none', 500); // Allow for fade-out effect
-  }
-}, 15000); // 15 seconds
 
 // Open side menu
 menuBtn.addEventListener('click', () => {
@@ -385,18 +369,58 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
+// Function to hide the instructions box
+function hideInstructions() {
+  const instructions = document.getElementById('instructions');
+  if (instructions) {
+    instructions.style.opacity = '0'; // Start fade-out
+    setTimeout(() => {
+      instructions.style.display = 'none'; // Remove after fade-out
+    }, 500); // Match transition duration
+  }
+}
+
+// Ensure the DOM is fully loaded before attaching events
+document.addEventListener('DOMContentLoaded', () => {
+  // Create and append a close button dynamically
+  const instructions = document.getElementById('instructions');
+  if (instructions) {
+    const closeButton = document.createElement('button');
+    closeButton.innerHTML = '×';
+    closeButton.style.cssText = `
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    `;
+    instructions.appendChild(closeButton);
+
+    // Add click event listener to close button
+    closeButton.addEventListener('click', hideInstructions);
+
+    // Optional: Auto-hide the instructions after 15 seconds
+    setTimeout(hideInstructions, 15000);
+  }
+});
+
+////////
 // Create an HTML element to display camera coordinates
 const cameraInfo = document.createElement('div');
 cameraInfo.style.position = 'absolute';
-cameraInfo.style.top = '5px';
-cameraInfo.style.left = '5px';
-cameraInfo.style.padding = '5px';
+cameraInfo.style.top = '10px';
+cameraInfo.style.left = '10px';
+cameraInfo.style.padding = '10px';
 cameraInfo.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
 cameraInfo.style.color = 'white';
 cameraInfo.style.fontFamily = 'Arial, sans-serif';
-cameraInfo.style.fontSize = '8px';
-cameraInfo.style.borderRadius = '3px';
-cameraInfo.style.zIndex = '5';
+cameraInfo.style.fontSize = '14px';
+cameraInfo.style.borderRadius = '5px';
+cameraInfo.style.zIndex = '10';
 document.body.appendChild(cameraInfo);
 
 // Update the coordinates dynamically in the render loop
