@@ -20,7 +20,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 );
-camera.position.set(-7, 15, 82);
+camera.position.set(-7, 20, 82);
 scene.add(camera);
 
 // Add Lights
@@ -138,6 +138,15 @@ gltfLoader.load('./vr_gallery.glb', (gltf) => {
   console.log('Shop scene loaded.');
 });
 
+// Load GLTF scene
+gltfLoader.load('./cow.glb', (gltf) => {
+  const shopScene = gltf.scene;
+  shopScene.scale.set(1, 1, 1);
+  shopScene.position.set(0, -1, 0);
+  scene.add(shopScene);
+  console.log('Shop scene loaded.');
+});
+
 import { createSky } from './sky.js';
 
 
@@ -155,23 +164,27 @@ scene.add(floorMesh);
 const walkableMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, visible: false }); // Green for debugging
 
 // Define walkable areas
-const walkableArea1 = new THREE.Mesh(new THREE.PlaneGeometry(1000, 1000), walkableMaterial);
+const walkableArea1 = new THREE.Mesh(new THREE.PlaneGeometry(167, 80), walkableMaterial);
 walkableArea1.rotation.x = -Math.PI / 2; // Horizontal
-walkableArea1.position.set(0, 1, 28); // Adjust position
+walkableArea1.position.set(0, 1, 44); // Adjust position
 scene.add(walkableArea1);
 
-const walkableArea2 = new THREE.Mesh(new THREE.PlaneGeometry(50, 50), walkableMaterial);
+const walkableArea2 = new THREE.Mesh(new THREE.PlaneGeometry(60, 125), walkableMaterial);
 walkableArea2.rotation.x = -Math.PI / 2; // Horizontal
-walkableArea2.position.set(150, 1, 0); // Adjust position
+walkableArea2.position.set(47, 1, -20); // Adjust position
 scene.add(walkableArea2);
 
-const walkableArea3 = new THREE.Mesh(new THREE.PlaneGeometry(80, 80), walkableMaterial);
+const walkableArea3 = new THREE.Mesh(new THREE.PlaneGeometry(70, 125), walkableMaterial);
 walkableArea3.rotation.x = -Math.PI / 2; // Horizontal
-walkableArea3.position.set(-70, 1, -50); // Adjust position
+walkableArea3.position.set(-47, 1, -20); // Adjust position
 scene.add(walkableArea3);
+const walkableArea4 = new THREE.Mesh(new THREE.PlaneGeometry(167, 60), walkableMaterial);
+walkableArea4.rotation.x = -Math.PI / 2; // Horizontal
+walkableArea4.position.set(0, 1, -50); // Adjust position
+scene.add(walkableArea4);
 
 // Add all walkable areas to the array
-const walkableAreas = [walkableArea1, walkableArea2, walkableArea3];
+const walkableAreas = [walkableArea1, walkableArea2, walkableArea3,walkableArea4];
 
 const groundRaycaster = new THREE.Raycaster();
 const rayDirection = new THREE.Vector3(0, -1, 0); // Cast downwards (Y-axis)
@@ -192,7 +205,7 @@ const mediaItems = [
     type: 'image', 
     path: './images/1.png', 
     size: { width: 9, height: 5 }, 
-    position: { x: -25.2, y: 16.3, z: -9.9 }, 
+    position: { x: -25.2, y: 16.3, z: -85 }, 
     rotation: { x: 0, y: Math.PI / .10, z: 0 }, // 45 degrees rotation around Y-axis
     url: 'http://www.yamashita-kogei.com/pdf/ecomark_bamboo.pdf' 
   },
@@ -200,7 +213,7 @@ const mediaItems = [
     type: 'image', 
     path: './images/4.png', 
     size: { width: 15, height: 10 }, 
-    position: { x: 2.01, y: 13, z: -25.1 }, 
+    position: { x: 2.01, y: 13, z: -85 }, 
     rotation: { x: 0, y: Math.PI / .10, z: 0 }, // 90 degrees rotation around X-axis
     url: 'http://www.example.com/photo2' 
   },
@@ -208,7 +221,7 @@ const mediaItems = [
     type: 'image', 
     path: './images/3.png', 
     size: { width: 9, height: 5 }, 
-    position: { x: -25.2, y: 27.5, z: -10.3 }, 
+    position: { x: -25.2, y: 27.5, z: -85 }, 
     rotation: { x: 0, y: 0, z: Math.PI / .10 }, // 90 degrees rotation around Z-axis
     url: 'http://www.example.com/photo3' 
   },
@@ -216,18 +229,18 @@ const mediaItems = [
     type: 'video', 
     path: './video/2.mp4', 
     size: { width: 51, height: 29.3 }, 
-    position: { x: -138.8, y: 39, z: -13.7 }, 
+    position: { x: -138.8, y: 39, z: -85 }, 
     rotation: { x: 0, y: Math.PI / .16, z: Math.PI / .1 }, // 60 degrees rotation around Y-axis
     url: 'http://www.example.com/video1' 
   }
   ,
   { 
     type: 'video', 
-    path: './video/products.mp4', 
-    size: { width: 55, height: 32 }, 
-    position: { x: -4, y: 52, z: -56 }, 
-    rotation:{ x: 0, y: Math.PI / .10, z: 0 }, // 90 degrees rotation around X-axis
-    url: 'http://www.example.com/video2' 
+    path: './cowvid.mp4', 
+    size: { width: 12, height: 6.8 }, 
+    position: { x: 20, y: 12, z: 5 }, 
+    rotation:{ x: Math.PI/-3.4, y: 0, z: 0 }, // 90 degrees rotation around X-axis
+    url: 'https://www.canva.com/design/DAGX-XTM0jY/neLikvhpi3Sdj-L6AGIrWw/watch?utm_content=DAGX-XTM0jY&utm_campaign=share_your_design&utm_medium=link&utm_source=shareyourdesignpanel' 
   }
 ];
 
@@ -356,6 +369,44 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
+// Create an HTML element to display camera coordinates
+const cameraInfo = document.createElement('div');
+cameraInfo.style.position = 'absolute';
+cameraInfo.style.top = '5px';
+cameraInfo.style.left = '5px';
+cameraInfo.style.padding = '5px';
+cameraInfo.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+cameraInfo.style.color = 'white';
+cameraInfo.style.fontFamily = 'Arial, sans-serif';
+cameraInfo.style.fontSize = '8px';
+cameraInfo.style.borderRadius = '3px';
+cameraInfo.style.zIndex = '5';
+document.body.appendChild(cameraInfo);
 
+// Update the coordinates dynamically in the render loop
+function updateCameraInfo() {
+  const { x, y, z } = camera.position;
+  cameraInfo.textContent = `Camera Coordinates:\nX: ${x.toFixed(2)}\nY: ${y.toFixed(2)}\nZ: ${z.toFixed(2)}`;
+}
+
+// Render loop
+function animate() {
+  requestAnimationFrame(animate);
+
+  // Example: Move camera dynamically (can be customized)
+  camera.position.x += 0.0001;
+  camera.position.y += 0.0001;
+  camera.position.z += 0.0001;
+
+  // Update the camera info display
+  updateCameraInfo();
+
+  // Render the scene
+  renderer.render(scene, camera);
+}
+
+animate();
+
+////********** */
 // Start animation
 draw();
