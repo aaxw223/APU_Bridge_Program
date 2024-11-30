@@ -47,6 +47,22 @@ controls.addEventListener('unlock', () => console.log('Pointer unlocked'));
 const sideMenu = document.getElementById('side-menu');
 const menuBtn = document.getElementById('menu-btn');
 const closeBtn = document.getElementById('close-btn');
+// Select the close button
+const closeButton = document.getElementById('close-instructions');
+
+// Add a click event listener to hide the instructions
+closeButton.addEventListener('click', function () {
+  document.getElementById('instructions').style.display = 'none';
+});
+
+// Optional: Add a timeout to hide the instructions after a certain time
+setTimeout(() => {
+  const instructions = document.getElementById('instructions');
+  if (instructions) {
+    instructions.style.opacity = '0';
+    setTimeout(() => instructions.style.display = 'none', 500); // Allow for fade-out effect
+  }
+}, 15000); // 15 seconds
 
 // Open side menu
 menuBtn.addEventListener('click', () => {
