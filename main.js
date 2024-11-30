@@ -130,7 +130,7 @@ loadAnimatedCharacter('./models/population/scene.gltf', { x: -10, y: 0, z: -30 }
 loadAnimatedCharacter('./models/character2/scene.gltf', { x: -90, y: 0, z: 5 }, 5);
 
 // Load GLTF scene
-gltfLoader.load('./scene1.glb', (gltf) => {
+gltfLoader.load('./vr_gallery.glb', (gltf) => {
   const shopScene = gltf.scene;
   shopScene.scale.set(0.1, 0.1, 0.1);
   shopScene.position.set(0, 0.01, 0);
