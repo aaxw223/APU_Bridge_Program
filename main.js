@@ -132,31 +132,12 @@ loadAnimatedCharacter('./models/character2/scene.gltf', { x: -90, y: 0, z: 5 }, 
 // Load GLTF scene
 gltfLoader.load('./vr_gallery.glb', (gltf) => {
   const shopScene = gltf.scene;
-  shopScene.scale.set(0.1, 0.1, 0.1);
+  shopScene.scale.set(8, 8, 8);
   shopScene.position.set(0, 0.01, 0);
   scene.add(shopScene);
   console.log('Shop scene loaded.');
 });
-// Load the second GLTF model
-gltfLoader.load('.untitled.glb', (gltf) => {
-  const anotherModel = gltf.scene;
-  anotherModel.scale.set(0.2, 0.2, 0.2); // Adjust the scale as needed
-  anotherModel.position.set(-5.0, -11, -32); // Move it to a visible location
-; // Adjust the position as needed
-  anotherModel.rotation.y = Math.PI / .67; // Optional: Rotate the model
-  scene.add(anotherModel)
-  console.log('Another model loaded.');
-  
-});
-// Load GLTF 3rd  scene
-gltfLoader.load('./models/booth/scene.gltf', (gltf) => {
-  const shopScene2 = gltf.scene;
-  shopScene2.scale.set(8, 8, 8);
-  shopScene2.position.set(70, 0.01, -10);
-  shopScene2.rotation.y= Math.PI / .56;
-  scene.add(shopScene2);
-  console.log('Shop scene2 loaded.');
-});
+
 import { createSky } from './sky.js';
 
 
