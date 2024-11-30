@@ -130,7 +130,7 @@ loadAnimatedCharacter('./models/population/scene.gltf', { x: -10, y: 0, z: -30 }
 loadAnimatedCharacter('./models/character2/scene.gltf', { x: -90, y: 0, z: 5 }, 5);
 
 // Load GLTF scene
-gltfLoader.load('./models/scene1.glb', (gltf) => {
+gltfLoader.load('./scene1.glb', (gltf) => {
   const shopScene = gltf.scene;
   shopScene.scale.set(0.1, 0.1, 0.1);
   shopScene.position.set(0, 0.01, 0);
@@ -138,7 +138,7 @@ gltfLoader.load('./models/scene1.glb', (gltf) => {
   console.log('Shop scene loaded.');
 });
 // Load the second GLTF model
-gltfLoader.load('./models/untitled.glb', (gltf) => {
+gltfLoader.load('.untitled.glb', (gltf) => {
   const anotherModel = gltf.scene;
   anotherModel.scale.set(0.2, 0.2, 0.2); // Adjust the scale as needed
   anotherModel.position.set(-5.0, -11, -32); // Move it to a visible location
