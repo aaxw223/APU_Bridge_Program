@@ -114,63 +114,64 @@ body {
 }
 /* Main container for the instructions */
 #instructions {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 300px;
-  background-color: rgba(0, 0, 0, 0.85);
-  color: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
-  overflow: hidden;
-}
-
-/* Style for the heading or title */
-#instructions p {
-  margin: 0 0 10px;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-/* Style for the main list */
-#instructions ul {
-  padding-left: 20px;
-  margin: 0;
-  list-style: disc;
-}
-
-/* Style for nested lists */
-#instructions ul ul {
-  padding-left: 20px;
-  margin-top: 5px;
-  list-style: circle;
-}
-
-/* Style for each list item */
-#instructions li {
-  margin-bottom: 10px;
-}
-
-/* Close button */
-#instructions button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  padding: 0;
-}
-
-/* Close button hover effect */
-#instructions button:hover {
-  color: #ff4c4c;
-}
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    overflow: hidden;
+  }
+  
+  /* Style for the heading or title */
+  #instructions p {
+    margin: 0 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  /* Style for the main list */
+  #instructions ul {
+    padding-left: 20px;
+    margin: 0;
+    list-style: disc;
+  }
+  
+  /* Style for nested lists */
+  #instructions ul ul {
+    padding-left: 20px;
+    margin-top: 5px;
+    list-style: circle;
+  }
+  
+  /* Style for each list item */
+  #instructions li {
+    margin-bottom: 10px;
+  }
+  
+  /* Close button */
+  #instructions button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  /* Close button hover effect */
+  #instructions button:hover {
+    color: #ff4c4c;
+  }
+  
