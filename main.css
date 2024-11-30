@@ -112,3 +112,31 @@ body {
 #menu-btn:hover {
     background-color: #24292c;
 }
+#instructions {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 250px;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+#instructions ul {
+  padding-left: 20px;
+}
+
+#instructions li {
+  margin-bottom: 8px;
+}
+
+#instructions p {
+  margin: 0 0 10px;
+  font-weight: bold;
+}
