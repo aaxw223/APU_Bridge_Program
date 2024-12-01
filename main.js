@@ -122,18 +122,15 @@ function loadAnimatedCharacter(path, position, scale, rotation = { x: 0, y: 0, z
 
 
 // Load models
-loadAnimatedCharacter('./models/character1/scene.gltf', { x: -83, y: 0, z: -5 }, 5,{ x: 0, y: Math.PI / .27, z: 0 });
-loadAnimatedCharacter('./models/character2/scene.gltf', { x: -10, y: 0, z: -15 }, 5);
-loadAnimatedCharacter('./models/character3/scene.gltf', { x: -2.7, y: 2, z: -13 }, 4, { x: 0, y: Math.PI / 2, z: 0 } ); // rotation
-loadAnimatedCharacter('./models/character4/scene.gltf', { x: -16, y: 0, z: -8 }, 5,{ x: 0, y: Math.PI / 1.5, z: 0 });
-loadAnimatedCharacter('./models/population/scene.gltf', { x: -10, y: 0, z: -30 }, 8);
-loadAnimatedCharacter('./models/character2/scene.gltf', { x: -90, y: 0, z: 5 }, 5);
+loadAnimatedCharacter('./man.glb', { x: 30, y: 1, z: 21 }, 5.5,{ x: 0, y: Math.PI /-1.5, z:0 });
+
+
 
 // Load GLTF scene
 gltfLoader.load('./vr_gallery.glb', (gltf) => {
   const shopScene = gltf.scene;
   shopScene.scale.set(8, 8, 8);
-  shopScene.position.set(0, 0.01, 0);
+  shopScene.position.set(0, 0.5, 0);
   scene.add(shopScene);
   console.log('Shop scene loaded.');
 });
@@ -155,7 +152,7 @@ createSky(scene);
 
 // Floor
 const floorMesh = new THREE.Mesh(
-  new THREE.PlaneGeometry(500, 500),
+  new THREE.PlaneGeometry(300, 300),
   new THREE.MeshLambertMaterial({ color: 'burlywood' })
 );
 floorMesh.rotation.x = -Math.PI / 2;
@@ -407,6 +404,49 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(hideInstructions, 15000);
   }
 });
+
+////////
+// Create an HTML element to display camera coordinates
+const cameraInfo = document.createElement('div');
+cameraInfo.style.position = 'absolute';
+cameraInfo.style.top = '10px';
+cameraInfo.style.left = '10px';
+cameraInfo.style.padding = '10px';
+cameraInfo.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+cameraInfo.style.color = 'white';
+cameraInfo.style.fontFamily = 'Arial, sans-serif';
+cameraInfo.style.fontSize = '14px';
+cameraInfo.style.borderRadius = '5px';
+cameraInfo.style.zIndex = '10';
+document.body.appendChild(cameraInfo);
+
+// Update the coordinates dynamically in the render loop
+function updateCameraInfo() {
+  const { x, y, z } = camera.position;
+  cameraInfo.textContent = `Camera Coordinates:\nX: ${x.toFixed(2)}\nY: ${y.toFixed(2)}\nZ: ${z.toFixed(2)}`;
+}
+
+// Render loop
+function animate() {
+  requestAnimationFrame(animate);
+
+  // Example: Move camera dynamically (can be customized)
+  camera.position.x += 0.0001;
+  camera.position.y += 0.0001;
+  camera.position.z += 0.0001;
+
+  // Update the camera info display
+  updateCameraInfo();
+
+  // Render the scene
+  renderer.render(scene, camera);
+}
+
+animate();
+
+////********** */
+// Start animation
+draw();
 
 
 // Start animation
