@@ -225,7 +225,7 @@ const mediaItems = [
   { 
     type: 'video', 
     path: './video/2.mp4', 
-    size: { width: 51, height: 29.3 }, 
+    size: { width: 1, height: .3 }, 
     position: { x: -138.8, y: 39, z: -85 }, 
     rotation: { x: 0, y: Math.PI / .16, z: Math.PI / .1 }, // 60 degrees rotation around Y-axis
     url: 'http://www.example.com/video1' 
