@@ -462,44 +462,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-////////
-// Create an HTML element to display camera coordinates
-const cameraInfo = document.createElement('div');
-cameraInfo.style.position = 'absolute';
-cameraInfo.style.top = '10px';
-cameraInfo.style.left = '10px';
-cameraInfo.style.padding = '10px';
-cameraInfo.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-cameraInfo.style.color = 'white';
-cameraInfo.style.fontFamily = 'Arial, sans-serif';
-cameraInfo.style.fontSize = '14px';
-cameraInfo.style.borderRadius = '5px';
-cameraInfo.style.zIndex = '10';
-document.body.appendChild(cameraInfo);
 
-// Update the coordinates dynamically in the render loop
-function updateCameraInfo() {
-  const { x, y, z } = camera.position;
-  cameraInfo.textContent = `Camera Coordinates:\nX: ${x.toFixed(2)}\nY: ${y.toFixed(2)}\nZ: ${z.toFixed(2)}`;
-}
-
-// Render loop
-function animate() {
-  requestAnimationFrame(animate);
-
-  // Example: Move camera dynamically (can be customized)
-  camera.position.x += 0.0001;
-  camera.position.y += 0.0001;
-  camera.position.z += 0.0001;
-
-  // Update the camera info display
-  updateCameraInfo();
-
-  // Render the scene
-  renderer.render(scene, camera);
-}
-
-animate();
 
 ////********** */
 // Start animation
