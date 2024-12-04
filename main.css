@@ -1,12 +1,14 @@
-body {
-	margin: 0;
+/* Make canvas cover the whole screen */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scrolling */
+  height: 100%;
 }
-#three-canvas {
-	position: absolute;
-	left: 0;
-	top: 0;
+canvas {
+  display: block; /* Removes extra space around the canvas */
 }
-/* styles.css */
+
 
 /* Loading Screen Styles */
 #loading-screen {
