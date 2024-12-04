@@ -2,6 +2,11 @@
 import * as THREE from 'three';
 import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { initializeFastTravelMenu } from './fastTravel.js';
+import { initializeTouchLook } from './touchLook.js';
+
+
+
 
 // Initialize Renderer
 const canvas = document.querySelector('#three-canvas');
@@ -22,7 +27,9 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.set(-7, 20, 82);
 scene.add(camera);
-
+initializeFastTravelMenu(camera);
+// Initialize the touch-based free-look system
+const updateCameraRotation = initializeTouchLook(camera, renderer);
 // Add Lights
 const ambientLight = new THREE.AmbientLight('white', 0.8);
 scene.add(ambientLight);
@@ -30,18 +37,21 @@ const directionalLight = new THREE.DirectionalLight('white', 0.5);
 directionalLight.position.set(1, 5, 2);
 scene.add(directionalLight);
 
-// PointerLockControls setup
-const controls = new PointerLockControls(camera, renderer.domElement);
+
 document.addEventListener('click', (event) => {
-    // Prevent locking when clicking on side menu buttons or menu area
-    if (event.target.closest('#menu-btn') || event.target.closest('#side-menu')) {
-        return;
+    // Prevent locking when clicking on specific interactive elements
+    if (
+        event.target.closest('#menu-btn') || 
+        event.target.closest('#side-menu') || 
+        event.target.closest('#fast-travel-button') || 
+        event.target.closest('#control-container') // Add more selectors if needed
+    ) {
+        return; // Do not lock the pointer
     }
-    controls.lock();
+    controls.lock(); // Lock the pointer for the scene
 });
 
-// Log unlock events for debugging
-controls.addEventListener('unlock', () => console.log('Pointer unlocked'));
+
 
 // Side menu elements
 const sideMenu = document.getElementById('side-menu');
@@ -61,6 +71,10 @@ closeBtn.addEventListener('click', () => {
     console.log('Pointer lock can be re-enabled');
 });
 
+// PointerLockControls setup
+const controls = new PointerLockControls(camera, renderer.domElement);
+// Log unlock events for debugging
+controls.addEventListener('unlock', () => console.log('Pointer unlocked'));
 // Movement variables
 const velocity = new THREE.Vector3();
 const direction = new THREE.Vector3();
@@ -83,6 +97,54 @@ document.addEventListener('keyup', (event) => {
     case 'KeyD': move.right = false; break;
   }
 });
+function animateModels(delta) {
+  if (!controls.isLocked) return;
+
+  const speedMultiplier = 50; // Base movement speed
+  const acceleration = 20; // How quickly to reach max speed
+  const friction = 0.85; // Friction to slow down smoothly
+
+  // Update velocity based on input
+  const targetMovement = calculateMovement(delta, speedMultiplier);
+  velocity.lerp(targetMovement, acceleration * delta); // Gradually approach target velocity
+
+  // Predict the next position based on velocity
+  const nextPosition = camera.position.clone().add(velocity.clone().multiplyScalar(delta));
+
+  // Check if the next position is within walkable areas
+  if (isOnWalkableArea(nextPosition)) {
+    // Apply velocity and move the camera
+    camera.position.copy(nextPosition);
+  } else {
+    console.log('Blocked! Stay within walkable path.');
+    // Stop velocity if collision occurs
+    velocity.set(0, 0, 0);
+  }
+
+  // Apply friction for smoother stopping
+  velocity.multiplyScalar(friction);
+}
+function calculateMovement(delta, speedMultiplier) {
+  // Get the camera's forward direction
+  const forward = new THREE.Vector3();
+  camera.getWorldDirection(forward);
+  forward.y = 0; // Ignore vertical movement
+  forward.normalize();
+
+  // Get the camera's right direction
+  const right = new THREE.Vector3();
+  right.crossVectors(forward, camera.up).normalize();
+  const velocity = new THREE.Vector3(); // Holds the current movement velocity
+
+  // Calculate target velocity based on WASD input
+  const movement = new THREE.Vector3();
+  if (move.forward) movement.add(forward.multiplyScalar(speedMultiplier));
+  if (move.backward) movement.add(forward.multiplyScalar(-speedMultiplier));
+  if (move.left) movement.add(right.multiplyScalar(-speedMultiplier)); // Negative for left
+  if (move.right) movement.add(right.multiplyScalar(speedMultiplier)); // Positive for right
+
+  return movement;
+}
 
 // Initialize GLTFLoader
 const gltfLoader = new GLTFLoader();
@@ -204,7 +266,7 @@ const mediaItems = [
     size: { width: 9, height: 5 }, 
     position: { x: -25.2, y: 16.3, z: -85 }, 
     rotation: { x: 0, y: Math.PI / .10, z: 0 }, // 45 degrees rotation around Y-axis
-    url: 'http://www.yamashita-kogei.com/pdf/ecomark_bamboo.pdf' 
+    url: 'http://www.example.com/photo2' 
   },
   { 
     type: 'image', 
@@ -225,7 +287,7 @@ const mediaItems = [
   { 
     type: 'video', 
     path: './video/2.mp4', 
-    size: { width: 1, height: .3 }, 
+    size: { width: 51, height: 29.3 }, 
     position: { x: -138.8, y: 39, z: -85 }, 
     rotation: { x: 0, y: Math.PI / .16, z: Math.PI / .1 }, // 60 degrees rotation around Y-axis
     url: 'http://www.example.com/video1' 
@@ -294,71 +356,64 @@ window.addEventListener('click', (event) => {
     }
   }
 });
-
-function animateModels(delta) {
-  if (!controls.isLocked) return;
-
-  const speedMultiplier = 50; // Base movement speed
-  const acceleration = 20; // How quickly to reach max speed
-  const friction = 0.85; // Friction to slow down smoothly
-
-  // Update velocity based on input
-  const targetMovement = calculateMovement(delta, speedMultiplier);
-  velocity.lerp(targetMovement, acceleration * delta); // Gradually approach target velocity
-
-  // Predict the next position based on velocity
-  const nextPosition = camera.position.clone().add(velocity.clone().multiplyScalar(delta));
-
-  // Check if the next position is within walkable areas
-  if (isOnWalkableArea(nextPosition)) {
-    // Apply velocity and move the camera
-    camera.position.copy(nextPosition);
-  } else {
-    console.log('Blocked! Stay within walkable path.');
-    // Stop velocity if collision occurs
-    velocity.set(0, 0, 0);
-  }
-
-  // Apply friction for smoother stopping
-  velocity.multiplyScalar(friction);
+// Check if the device is mobile
+function isMobileDevice() {
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  return /Android|iPhone|iPad|iPod/i.test(userAgent);
 }
-function calculateMovement(delta, speedMultiplier) {
-  // Get the camera's forward direction
-  const forward = new THREE.Vector3();
-  camera.getWorldDirection(forward);
-  forward.y = 0; // Ignore vertical movement
-  forward.normalize();
 
-  // Get the camera's right direction
-  const right = new THREE.Vector3();
-  right.crossVectors(forward, camera.up).normalize();
-  const velocity = new THREE.Vector3(); // Holds the current movement velocity
+// Only enable PointerLockControls for non-mobile devices
+if (!isMobileDevice()) {
+  controls.addEventListener('lock', () => {
+      console.log('Pointer locked.');
+  });
 
-  // Calculate target velocity based on WASD input
-  const movement = new THREE.Vector3();
-  if (move.forward) movement.add(forward.multiplyScalar(speedMultiplier));
-  if (move.backward) movement.add(forward.multiplyScalar(-speedMultiplier));
-  if (move.left) movement.add(right.multiplyScalar(-speedMultiplier)); // Negative for left
-  if (move.right) movement.add(right.multiplyScalar(speedMultiplier)); // Positive for right
+  controls.addEventListener('unlock', () => {
+      console.log('Pointer unlocked.');
+  });
 
-  return movement;
+  // Lock pointer on click for desktop
+  document.addEventListener('click', () => {
+      controls.lock();
+  });
+} else {
+  console.log('PointerLockControls disabled for mobile devices.');
+}
+if (isMobileDevice()) {
+  document.addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent default locking behavior
+      console.log('Pointer lock prevented on mobile.');
+  });
 }
 
 // Main animation loop
 const clock = new THREE.Clock();
+
+// Animation loop
 function draw() {
   const delta = clock.getDelta();
 
   // Update animation mixers
   animationMixers.forEach((mixer) => {
-    mixer.update(delta);
+      mixer.update(delta);
   });
+
+  // Update camera rotation only for mobile devices
+  if (typeof updateCameraRotation === 'function') {
+      updateCameraRotation();
+  }
 
   // Handle movement and rendering
   animateModels(delta);
+
+  // Render the scene
   renderer.render(scene, camera);
+
+  // Continue the animation loop
   renderer.setAnimationLoop(draw);
 }
+
+draw();
 
 // Handle window resizing
 window.addEventListener('resize', () => {
@@ -406,10 +461,46 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
+////////
+// Create an HTML element to display camera coordinates
+const cameraInfo = document.createElement('div');
+cameraInfo.style.position = 'absolute';
+cameraInfo.style.top = '10px';
+cameraInfo.style.left = '10px';
+cameraInfo.style.padding = '10px';
+cameraInfo.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+cameraInfo.style.color = 'white';
+cameraInfo.style.fontFamily = 'Arial, sans-serif';
+cameraInfo.style.fontSize = '14px';
+cameraInfo.style.borderRadius = '5px';
+cameraInfo.style.zIndex = '10';
+document.body.appendChild(cameraInfo);
+
+// Update the coordinates dynamically in the render loop
+function updateCameraInfo() {
+  const { x, y, z } = camera.position;
+  cameraInfo.textContent = `Camera Coordinates:\nX: ${x.toFixed(2)}\nY: ${y.toFixed(2)}\nZ: ${z.toFixed(2)}`;
+}
+
+// Render loop
+function animate() {
+  requestAnimationFrame(animate);
+
+  // Example: Move camera dynamically (can be customized)
+  camera.position.x += 0.0001;
+  camera.position.y += 0.0001;
+  camera.position.z += 0.0001;
+
+  // Update the camera info display
+  updateCameraInfo();
+
+  // Render the scene
+  renderer.render(scene, camera);
+}
+
+animate();
+
 ////********** */
-// Start animation
-draw();
-
-
 // Start animation
 draw();
