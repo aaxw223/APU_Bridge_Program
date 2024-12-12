@@ -11,17 +11,18 @@ export async function createSky(scene) {
 
   // Configure Sky shader parameters
   const skyUniforms = sky.material.uniforms;
-  skyUniforms['turbidity'].value = 12; // Increase haziness
+  skyUniforms['turbidity'].value = 5; // Increase haziness
   skyUniforms['rayleigh'].value = 3; // Enhance blue scattering
   skyUniforms['mieCoefficient'].value = 0.003; // Reduce glare
   skyUniforms['mieDirectionalG'].value = 0.6; // Soften sun glow
 
   // Calculate and set Sun position
   const sun = new THREE.Vector3();
-  const phi = THREE.MathUtils.degToRad(90 - 10); // Elevation angle
-  const theta = THREE.MathUtils.degToRad(180);   // Azimuth angle
-  sun.setFromSphericalCoords(1, phi, theta);
-  skyUniforms['sunPosition'].value.copy(sun);
+  const phi = THREE.MathUtils.degToRad(90 - 30); // Lower the sun (e.g., 30° elevation)
+const theta = THREE.MathUtils.degToRad(30);   // Shift to a new azimuth angle
+sun.setFromSphericalCoords(1, phi, theta);
+skyUniforms['sunPosition'].value.copy(sun);
+
 
   // Add a directional light to mimic the Sun
   const directionalLight = new THREE.DirectionalLight(0xffffff, .01); // Full intensity
