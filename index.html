@@ -22,6 +22,15 @@
 	</script>
 </head>
 <body>
+
+
+  <div id="loading-screen">
+  <div class="spinner">
+  </div>
+  <div id="loading-text">Loading...</div>
+
+</div>
+
 	<canvas id="three-canvas"></canvas>
     <div id="side-menu">
         <button id="close-btn">&times;</button>
@@ -53,11 +62,7 @@
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-  <div id="loading-screen">
-    <div class="spinner"></div>
-    <p>Loading...</p>
-  </div>
+
   <div id="movement-buttons" style="display: none; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; gap: 10px;">
     <button id="forward-button">↑</button>
     <button id="left-button">←</button>
@@ -121,10 +126,5 @@
   <script src="loadingScreen.js"></script>
   <script type="module" src="fastTravel.js"></script>
   <script type="module" src="main.js"></script>
-</body>
-</html>
-
-  <script src="loadingScreen.js"></script>
-
 </body>
 </html>
