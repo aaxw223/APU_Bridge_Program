@@ -1,32 +1,32 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js';
 
 export async function createSky(scene) {
-  // Import Sky dynamically to keep the main bundle clean
+  // Dynamically import the Sky object
   const { Sky } = await import('https://cdn.jsdelivr.net/npm/three@0.155.0/examples/jsm/objects/Sky.js');
 
-  // Create the Sky object
+  // Create and configure the Sky object
   const sky = new Sky();
-  sky.scale.setScalar(500); // Large scale to cover the entire scene
+  sky.scale.setScalar(500); // Scale to cover the entire scene
   scene.add(sky);
 
-  // Sky shader parameters
+  // Configure Sky shader parameters
   const skyUniforms = sky.material.uniforms;
-  skyUniforms['turbidity'].value = 10; // Adjust haziness
-  skyUniforms['rayleigh'].value = 2; // Adjust blue scattering
-  skyUniforms['mieCoefficient'].value = 0.005; // Adjust glare
-  skyUniforms['mieDirectionalG'].value = 0.8; // Adjust sun glow
+  skyUniforms['turbidity'].value = 12; // Increase haziness
+  skyUniforms['rayleigh'].value = 3; // Enhance blue scattering
+  skyUniforms['mieCoefficient'].value = 0.003; // Reduce glare
+  skyUniforms['mieDirectionalG'].value = 0.6; // Soften sun glow
 
-  // Add a Sun to the sky
+  // Calculate and set Sun position
   const sun = new THREE.Vector3();
   const phi = THREE.MathUtils.degToRad(90 - 10); // Elevation angle
-  const theta = THREE.MathUtils.degToRad(180); // Azimuth angle
+  const theta = THREE.MathUtils.degToRad(180);   // Azimuth angle
   sun.setFromSphericalCoords(1, phi, theta);
   skyUniforms['sunPosition'].value.copy(sun);
 
-  // Add directional light to match the sun
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
+  // Add a directional light to mimic the Sun
+  const directionalLight = new THREE.DirectionalLight(0xffffff, .01); // Full intensity
   directionalLight.position.set(sun.x, sun.y, sun.z);
   scene.add(directionalLight);
 
-  console.log('Sky created and added to the scene.');
+  console.log('Sky and Sun successfully added to the scene.');
 }
