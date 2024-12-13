@@ -8,7 +8,10 @@
 	<link rel="stylesheet" href="./main.css">
   <link rel="preload" as="script" href="main.js">
 <link rel="preload" as="fetch" href="vr_gallery.glb">
-
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
 	<script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
 	<script type="importmap">
 		{
@@ -24,14 +27,13 @@
 <body>
 
 
+
   <div id="loading-screen">
-  <div class="spinner">
+    <div class="spinner"></div>
+    <div id="loading-text">Loading...</div>
   </div>
-  <div id="loading-text">Loading...</div>
-
-</div>
-
-	<canvas id="three-canvas"></canvas>
+  <div id="main-content">
+    <canvas id="three-canvas"></canvas>
     <div id="side-menu">
         <button id="close-btn">&times;</button>
         <h2>APU Bridge Program</h2>
@@ -121,6 +123,8 @@
             isPlaying = !isPlaying;
         });
     </script>
+  </div>
+  
     
     <script type="module" src="touchLook.js"></script>
   <script src="loadingScreen.js"></script>
