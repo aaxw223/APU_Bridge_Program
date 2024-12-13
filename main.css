@@ -11,31 +11,32 @@ canvas {
 }
 
 /* styles.css */
-
+/* Loading Screen Styles */
 #loading-screen {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg, #c2c2c2, #000000);
+  background: linear-gradient(135deg, #c2c2c2, rgba(0, 0, 0, 0.9)); /* Smooth gradient effect */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* Ensure it overlays all content */
+  z-index: 9999; /* Ensures it overlays all content */
   color: #ffffff;
   font-family: Arial, sans-serif;
   font-size: 1.5em;
 }
 
+/* Spinner Styles */
 .spinner {
   position: relative;
   width: 70px;
   height: 70px;
   border-radius: 50%;
   background: conic-gradient(#ffffff, transparent);
-  animation: rotate 1.5s linear infinite;
+  animation: rotate 1.5s linear infinite; /* Smooth rotating effect */
 }
 
 .spinner::before {
@@ -45,11 +46,12 @@ canvas {
   left: 50%;
   width: 50px;
   height: 50px;
-  background-color: #f8f8f8;
+  background-color: #f8f8f8; /* Inner circle color */
   border-radius: 50%;
   transform: translate(-50%, -50%);
 }
 
+/* Loading Percentage Styles */
 #loading-percent {
   position: absolute;
   top: 50%;
@@ -57,14 +59,16 @@ canvas {
   transform: translate(-50%, -50%);
   font-size: 1em;
   font-weight: bold;
-  color: #333;
+  color: #333; /* Slightly darker color for readability */
 }
 
+/* Loading Text Animation */
 #loading-text {
-  margin-top: 20px;
-  animation: fadeIn 2s ease-in-out infinite;
+  font-size: 20px;
+  color: #fff;
 }
 
+/* Keyframe Animations */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -76,10 +80,10 @@ canvas {
 
 @keyframes fadeIn {
   0%, 100% {
-    opacity: 0.5;
+    opacity: 0.5; /* Lower opacity at start and end */
   }
   50% {
-    opacity: 1;
+    opacity: 1; /* Fully visible at mid-point */
   }
 }
 
@@ -225,7 +229,7 @@ canvas {
     position: fixed;
     bottom: 20px; /* Position at the bottom */
     left: 20px; /* Position at the left */
-    background-color: rgb(0, 0, 0); /* Light background for visibility */
+    background-color: rgba(0, 0, 0, 0.696); /* Light background for visibility */
     padding: 10px; /* Add some padding */
     border-radius: 5px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(253, 0, 0, 0.2); /* Subtle shadow for better visibility */
@@ -241,3 +245,44 @@ canvas {
     width: 100%; /* Full width for dropdown and button */
 }
 
+/* Instructions container animations */
+#instructions {
+  transition: opacity 0.5s ease; /* Smooth fade-in and fade-out */
+  opacity: 1; /* Default visible */
+}
+
+#instructions.fade-out {
+  opacity: 0; /* Fade out */
+}
+
+#instructions.fade-in {
+  opacity: 1; /* Fade in */
+}
+
+/* Close button styling */
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Show Instructions button styling */
+.show-instructions-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #080a1da8;
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 10000;
+}
