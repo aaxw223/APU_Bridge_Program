@@ -110,6 +110,13 @@ canvas {
     color: white;
     margin-left: 25px;
 }
+#side-menu p {
+  color: white;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: justify;
+  font-size: large;
+}
 
 #side-menu ul {
     list-style-type: none;
