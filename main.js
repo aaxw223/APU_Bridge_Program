@@ -24,33 +24,81 @@ camera.position.set(-7, 20, 124), scene.add(camera), i(camera);
 let updateCameraRotation = a(camera, renderer),
     ambientLight = new e.AmbientLight("white", .01);
 scene.add(ambientLight), renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+// Get references to menu and side menu elements
 let menu = document.getElementById("fast-travel-menu");
-menu.style.display = "block", menu.style.visibility = "visible";
+menu.style.display = "block";
+menu.style.visibility = "visible";
+
 let controls = new t(camera, renderer.domElement);
-controls.addEventListener("unlock", () => console.log("Pointer unlocked")), document.addEventListener("click", e => {
-    let t = excludedElements.some(t => e.target.closest(t));
-    if (t) {
-        console.log("Interactive element clicked. Pointer lock prevented.");
-        return
-    }
-    controls.isLocked || (controls.lock(), console.log("Pointer locked."))
-}), document.addEventListener("click", e => {
-    let t = ["#menu-btn", "#side-menu", "#fast-travel-menu", "#fast-travel-select", "#fast-travel-button", "#control-container"],
-        o = t.some(t => e.target.closest(t));
-    if (o) {
+
+// Handle pointer unlock event
+controls.addEventListener("unlock", () => {
+    console.log("Pointer unlocked");
+});
+
+// Consolidated click event listener
+document.addEventListener("click", (e) => {
+    const excludedSelectors = [
+        "#menu-btn",
+        "#side-menu",
+        "#fast-travel-menu",
+        "#fast-travel-select",
+        "#fast-travel-button",
+        "#control-container"
+    ];
+
+    // Check if the clicked element matches any excluded selectors
+    const isExcluded = excludedSelectors.some((selector) => e.target.closest(selector));
+    if (isExcluded) {
         console.log("Pointer lock prevented on excluded element.");
-        return
+        return;
     }
-    controls.isLocked || (controls.lock(), console.log("Pointer locked for scene."))
+
+    // Lock pointer if not already locked
+    if (!controls.isLocked) {
+        controls.lock();
+        console.log("Pointer locked for scene.");
+    }
 });
-let sideMenu = document.getElementById("side-menu"),
-    menuBtn = document.getElementById("menu-btn"),
-    closeBtn = document.getElementById("close-btn");
+
+// Handle side menu toggling
+let sideMenu = document.getElementById("side-menu");
+let menuBtn = document.getElementById("menu-btn");
+let closeBtn = document.getElementById("close-btn");
+
+// Open side menu and disable pointer lock
 menuBtn.addEventListener("click", () => {
-    sideMenu.style.width = "250px", menuBtn.style.display = "none", closeBtn.style.display = "block", controls.unlock(), console.log("Pointer lock disabled for side menu")
-}), closeBtn.addEventListener("click", () => {
-    sideMenu.style.width = "0", menuBtn.style.display = "block", closeBtn.style.display = "none", console.log("Pointer lock can be re-enabled")
+    sideMenu.style.width = "250px";
+    menuBtn.style.display = "none";
+    closeBtn.style.display = "block";
+    controls.unlock(); // Unlock pointer
+    console.log("Pointer lock disabled for side menu");
 });
+
+// Close side menu and allow pointer lock
+closeBtn.addEventListener("click", () => {
+    sideMenu.style.width = "0";
+    menuBtn.style.display = "block";
+    closeBtn.style.display = "none";
+    console.log("Pointer lock can be re-enabled");
+});
+// Get a reference to the ESC note element
+const escNote = document.getElementById("esc-note");
+
+// Pointer lock event listeners
+controls.addEventListener("lock", () => {
+    console.log("Pointer locked");
+    escNote.style.display = "block"; // Show the ESC note
+});
+
+controls.addEventListener("unlock", () => {
+    console.log("Pointer unlocked");
+    escNote.style.display = "none"; // Hide the ESC note
+});
+
+// Initialize with the element hidden
+escNote.style.display = "none";
+
 let velocity = new e.Vector3,
     direction = new e.Vector3,
     move = {
