@@ -35,13 +35,10 @@
   <div id="main-content">
     <canvas id="three-canvas"></canvas>
     <div id="side-menu">
-      <button id="close-btn">&times;</button>
-      <h2>Culture through Creativity</h2>
-      <p>
-          <strong>Art Bridges</strong> is a 3D virtual gallery celebrating cultural <strong>diversity</strong> and <strong>creativity</strong>. Explore stunning <strong>artwork</strong> from around the world, including highlights from <strong>Japan</strong>,<strong>Bangladesh</strong>, <strong>Vietnam</strong>, and <strong>Myanmar</strong>. With interactive <strong>navigation</strong> and immersive <strong>design</strong>, it’s an engaging way to experience global <strong>artistry</strong> from anywhere.
-      </p>
-  </div>
-  
+        <button id="close-btn">&times;</button>
+        <h2>Welcome to Art Bridges, an immersive 3D virtual art gallery that showcases a vibrant collection of artwork from diverse cultures and countries. This online space connects global art enthusiasts and provides a unique platform to explore masterpieces in a dynamic virtual environment.</h2>
+      
+    </div>
     
     <button id="menu-btn">☰ About</button>
     
@@ -78,14 +75,14 @@
     <select id="fast-travel-select">
         <option value="">Select Location</option>
     </select>
-    <button id="fast-travel-button">Move</button>
+    <button id="fast-travel-button">Travel</button>
 </div>
 
   <div id="instructions">
     <p><strong>Instructions:</strong></p>
     <ul>
       <li><b>left-click:</b> Enter the scene</li>
-      <li><b>ESC:</b><strong> Unlock the mouse</strong></li>
+      <li><b>ESC:</b> Unlock the mouse</li>
       <li><b>WASD:</b> Move around:
         <ul>
           <li><b>W:</b> Move forward</li>
@@ -95,7 +92,7 @@
         </ul>
       </li>
       <li><b>Mouse:</b> Look around</li>
-      <p><strong>For Smart Phones:  use Move Option </strong> to Move And Touch to look</p>(Some Features might not be visible)
+      <p><strong>For Smart Phones:  use Fast travel Option </strong> to Move And Touch to look</p>(Some Features might not be visible)
     </ul>
   </div>
   
@@ -127,9 +124,26 @@
         });
     </script>
   </div>
-  <div id="esc-instruction" style="position: fixed; bottom: 0px; width: 100%; text-align: center; background-color: rgba(0, 0, 0, 0.7); color: white; padding: 5px 0; font-size: 14px;">
-    Press <strong>ESC</strong> to unlock Mouse
+  <!-- Add this to the bottom of your page -->
+<div id="esc-note">
+  Press <strong>ESC</strong> to unlock the mouse.
 </div>
+
+<!-- CSS Styling -->
+<style>
+  #esc-note {
+      position: fixed;
+      bottom: 5px;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      color: white;
+      background: rgba(0, 0, 0, 0.438); /* Transparent background for visibility */
+      padding: 5px ;
+      z-index: 1000; /* Ensures it stays on top */
+      font-family: Arial, sans-serif;
+  }
+</style>
 
     
     <script type="module" src="touchLook.js"></script>
