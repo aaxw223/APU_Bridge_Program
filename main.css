@@ -18,7 +18,7 @@ canvas {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(circle, rgba(50, 50, 50, 1) 0%, rgba(0, 0, 0, 0.85) 100%);
+  background: radial-gradient(circle, rgba(50, 50, 50, 1) 0%, rgb(0, 0, 0) 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,14 +57,14 @@ canvas {
 /* Loading Percentage Styles */
 #loading-percent {
   position: absolute;
-  bottom: 10%;
+  top: 65%; /* Adjusted to appear above spinner */
   left: 50%;
-  transform: translate(-50%, 0);
-  font-size: 1.2em;
+  transform: translate(-50%, -50%);
+  font-size: 1.5em; /* Slightly larger font for better readability */
   font-weight: bold;
-  color: #fff; /* Brighter color for better readability */
+  color: #fff; /* Contrasting color */
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
-  z-index: 10001;
+  z-index: 9999; /* Higher z-index to ensure visibility */
 }
 
 /* Loading Text Animation */
@@ -91,15 +91,6 @@ canvas {
 }
 
 
-/* Keyframe Animations */
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 @keyframes fadeIn {
   0%, 100% {
@@ -110,7 +101,41 @@ canvas {
   }
 }
 
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000; /* On top of everything */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex; /* Use flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  background-color: rgba(0, 0, 0, 0.8); /* Black background with transparency */
+}
 
+.modal-content {
+  width: 90%; /* Full width for smaller screens */
+  max-width: 500px; /* Limit width for larger screens */
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add some shadow for effect */
+  text-align: center;
+}
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
   /* Hide the main content initially */
   #main-content {
 	display: none;
@@ -122,7 +147,7 @@ canvas {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #d3502553;
+    background-color: #0e052b99;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -160,7 +185,7 @@ canvas {
 }
 
 #side-menu ul li a:hover {
-    background-color: #724c4c;
+    background-color: #201d316a;
 }
 
 #close-btn {
