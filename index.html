@@ -8,10 +8,9 @@
 	<link rel="stylesheet" href="./main.css">
   <link rel="preload" as="script" href="main.js">
 <link rel="preload" as="fetch" href="vr_gallery.glb">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
+
 	<script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
 	<script type="importmap">
 		{
@@ -40,7 +39,7 @@
       
     </div>
     
-    <button id="menu-btn">☰ About</button>
+    <button class="button-78" id="menu-btn">☰ About</button>
     
     
 	<style>
@@ -50,7 +49,7 @@
             top: 10px;
             right: 10px;
             padding: 10px 15px;
-            background-color: #17183f;
+            background-color: #17183f00;
             color: white;
             border: none;
             border-radius: 5px;
@@ -59,23 +58,18 @@
         }
 
         #music-btn:hover {
-            background-color: #24292c;
+            background-color: #24292c0a;
         }
     </style>
 </head>
 <body>
 
-  <div id="movement-buttons" style="display: none; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; gap: 10px;">
-    <button id="forward-button">↑</button>
-    <button id="left-button">←</button>
-    <button id="backward-button">↓</button>
-    <button id="right-button">→</button>
-</div>
+
   <div id="fast-travel-menu">
     <select id="fast-travel-select">
         <option value="">Select Location</option>
     </select>
-    <button id="fast-travel-button">Travel</button>
+    <button class="button-78"id="fast-travel-button">Travel</button>
 </div>
 
   <div id="instructions">
@@ -102,9 +96,12 @@
         <source src="music.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+<!-- HTML !-->
+
+
 
     <!-- Music button -->
-    <button id="music-btn">Play Music</button>
+    <button class="button-78" role="button"id="music-btn">Play Music</button>
 
     <script>
         const music = document.getElementById('background-music');
