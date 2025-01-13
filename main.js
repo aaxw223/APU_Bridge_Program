@@ -811,5 +811,5 @@ draw(), window.addEventListener("resize", () => {
         t.innerHTML = "\xd7", t.classList.add("close-button"), e.appendChild(t), t.addEventListener("click", hideInstructions), setTimeout(hideInstructions, 6e4)
     }
     let o = document.createElement("button");
-    o.id = "show-instructions-btn", o.textContent = "Show Instructions", o.classList.add("show-instructions-btn"), document.body.appendChild(o), o.addEventListener("click", showInstructions), o.style.display = "none"
+    o.id = "show-instructions-btn", o.textContent = "Instructions", o.classList.add("show-instructions-btn"), document.body.appendChild(o), o.addEventListener("click", showInstructions), o.style.display = "none"
 }), renderer.setPixelRatio(window.devicePixelRatio > 1 ? 1.5 : 1), draw();
