@@ -1,3 +1,4 @@
+
 /* Make canvas cover the whole screen */
 body, html {
   margin: 0;
@@ -17,25 +18,27 @@ canvas {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg, #c2c2c2, rgba(0, 0, 0, 0.9)); /* Smooth gradient effect */
+  background: radial-gradient(circle, rgba(50, 50, 50, 1) 0%, rgba(0, 0, 0, 0.85) 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 9999; /* Ensures it overlays all content */
   color: #ffffff;
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 1.5em;
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
 }
 
 /* Spinner Styles */
 .spinner {
   position: relative;
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  background: conic-gradient(#ffffff, transparent);
-  animation: rotate 1.5s linear infinite; /* Smooth rotating effect */
+  background: conic-gradient(rgba(255, 255, 255, 0.8), transparent);
+  animation: rotate 1.2s linear infinite; /* Faster smooth rotating effect */
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
 }
 
 .spinner::before {
@@ -43,29 +46,50 @@ canvas {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 50px;
-  height: 50px;
-  background-color: #f8f8f8; /* Inner circle color */
+  width: 55px;
+  height: 55px;
+  background-color: rgba(255, 255, 255, 0.9); /* Inner circle color */
   border-radius: 50%;
   transform: translate(-50%, -50%);
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Loading Percentage Styles */
 #loading-percent {
   position: absolute;
-  top: 50%;
+  bottom: 10%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1em;
+  transform: translate(-50%, 0);
+  font-size: 1.2em;
   font-weight: bold;
-  color: #333; /* Slightly darker color for readability */
+  color: #fff; /* Brighter color for better readability */
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+  z-index: 10001;
 }
 
 /* Loading Text Animation */
 #loading-text {
-  font-size: 20px;
-  color: #fff;
+  font-size: 22px;
+  color: #ffae42;
+  font-weight: 700;
+  margin-top: 20px;
+  animation: pulse 2s infinite ease-in-out;
 }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 
 /* Keyframe Animations */
 @keyframes rotate {
@@ -98,7 +122,7 @@ canvas {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #111111aa;
+    background-color: #d3502553;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -155,7 +179,7 @@ canvas {
     top: 20px;
     left: 20px;
     font-size: 18px;
-    background-color: #262525;
+    background-color: #ebe5e500;
     color: white;
     border: none;
     border-radius: 5px;
@@ -165,7 +189,7 @@ canvas {
 }
 
 #menu-btn:hover {
-    background-color: #24292c;
+    background-color: #24292c00;
 }
 /* Main container for the instructions */
 #instructions {
@@ -235,7 +259,7 @@ canvas {
     position: fixed;
     bottom: 20px; /* Position at the bottom */
     left: 20px; /* Position at the left */
-    background-color: rgba(0, 0, 0, 0.696); /* Light background for visibility */
+    background-color: rgba(0, 0, 0, 0.455); /* Light background for visibility */
     padding: 10px; /* Add some padding */
     border-radius: 5px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(253, 0, 0, 0.2); /* Subtle shadow for better visibility */
@@ -292,3 +316,114 @@ canvas {
   cursor: pointer;
   z-index: 10000;
 }
+/* CSS */
+.button-78 {
+  align-items: center;
+  appearance: none;
+  background-clip: padding-box;
+  background-color: initial;
+  background-image: none;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  flex-direction: row;
+  flex-shrink: 0;
+  font-family: Eina01,sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  justify-content: center;
+  line-height: 24px;
+  margin: 0;
+  min-height: 64px;
+  outline: none;
+  overflow: visible;
+  padding: 19px 26px;
+  pointer-events: auto;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: auto;
+  word-break: keep-all;
+  z-index: 0;
+}
+
+@media (min-width: 768px) {
+  .button-78 {
+    padding: 19px 32px;
+  }
+}
+
+.button-78:before,
+.button-78:after {
+  border-radius: 80px;
+}
+
+.button-78:before {
+  background-image: linear-gradient(92.83deg, #ff7426 0, #f93913a0 100%);
+  content: "";
+  display: block;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -2;
+}
+
+.button-78:after {
+  background-color: initial;
+  background-image: linear-gradient(#544c0f 0, #0c0d0d 100%);
+  bottom: 4px;
+  content: "";
+  display: block;
+  left: 4px;
+  overflow: hidden;
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  transition: all 100ms ease-out;
+  z-index: -1;
+}
+
+.button-78:hover:not(:disabled):before {
+  background: linear-gradient(92.83deg, rgb(255, 116, 38) 0%, rgb(249, 58, 19) 100%);
+}
+
+.button-78:hover:not(:disabled):after {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  transition-timing-function: ease-in;
+  opacity: 0;
+}
+
+.button-78:active:not(:disabled) {
+  color: #ccc;
+}
+
+.button-78:active:not(:disabled):before {
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
+}
+
+.button-78:active:not(:disabled):after {
+  background-image: linear-gradient(#541a0f 0, #0c0d0d 100%);
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
+  top: 4px;
+}
+
+.button-78:disabled {
+  cursor: default;
+  opacity: .24;
+}
+
