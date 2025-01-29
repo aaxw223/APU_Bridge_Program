@@ -32,4 +32,4 @@ FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM 
 THE USE OF THIS SOFTWARE.
 
-For inquiries or licensing permissions, contact: [dopeshott99@gmail.com]
+For inquiries or licensing permissions, contact: https://dopeshot.info/contact.html
